@@ -9,15 +9,15 @@ import 'package:econaija/widgets/econaijatextformfield.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
   final _formKey= GlobalKey<FormState>();
-class RenderWaste extends StatefulWidget {
+class shareitems extends StatefulWidget {
 
-  const RenderWaste({super.key});
+  const shareitems({super.key});
 
   @override
-  State<RenderWaste> createState() => _RenderWasteState();
+  State<shareitems> createState() => _shareitemsState();
 }
 
-class _RenderWasteState extends State<RenderWaste> {
+class _shareitemsState extends State<shareitems> {
   File ? _selectedImage;
   @override
   Widget build(BuildContext context) {
@@ -37,23 +37,24 @@ class _RenderWasteState extends State<RenderWaste> {
         ),
          body: SingleChildScrollView(child: Column(
           children: <Widget>[
-            Text('Render Waste',style: kHeaderDesigns,),
-            Text('Ensure proper disposal by handing over \n  waste to authorized facilities', textAlign: TextAlign.center,
+            Text('Share Excess Items',style: kHeaderDesigns,),
+            Text('Help reduce waste by sharing items you\nno longer need with others ', textAlign: TextAlign.center,
              style: TextStyle(fontSize: 16.0),),
             SizedBox(height: 30.0,),
-            Text('Fill in the following details',style: kHeader2Designs,),
+            Text('Fill out the form below to list the items you\'re willing to share.',style: kHeader2Designs,),
             SizedBox(height: 35,),
             Form(
               key: _formKey,
               child: Column(children: <Widget>[
-                Eco9jaTextFormField(labelText: 'Volume', hintText: '180 kg',),
+                Eco9jaTextFormField(labelText: 'Item Name', hintText: 'Math Textbooks',),
                 SizedBox(height: 10.0,),
-                Eco9jaTextFormField(labelText: 'Location', hintText: 'Ikeja, Lagos'),
+                Eco9jaTextFormField(labelText: 'Description', hintText: 'High School General Math Textbooks'),
                 SizedBox(height: 10.0,),
-                Eco9jaTextFormField(labelText: 'How Long Overdue?', hintText: '2 weeks')
-              ],)),
-              SizedBox(height: 10,),
-              Padding(
+                Eco9jaTextFormField(labelText: 'Condition', hintText: 'Gently Used'),
+                SizedBox(height: 10.0,),
+                Eco9jaTextFormField(labelText: 'Quantity', hintText: '6'),
+                SizedBox(height: 10.0,),
+                 Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: DottedBorder(
                   strokeWidth: 2,
@@ -81,8 +82,11 @@ class _RenderWasteState extends State<RenderWaste> {
                   ),
                 ),
               ),
-          
-            SizedBox(height: 80,),
+            SizedBox(height: 10.0,),
+                Eco9jaTextFormField(labelText: 'Contact Information', hintText: '+234 000 0000 000')
+              ],)),
+              
+            SizedBox(height: 100,),
             ElevatedButton(style:  ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
                   
@@ -95,17 +99,18 @@ class _RenderWasteState extends State<RenderWaste> {
                   const SnackBar(content: Text('Great'))
                 ),
               }
-            }, child: Text('Submit'))
+            }, child: Text('Share'))
           ],
          )),
     );
   }
-Future _pickImageFromGallery()async{
+
+   Future _pickImageFromGallery()async{
     final returnedImage= await ImagePicker().pickImage(source: ImageSource.gallery);
     if(returnedImage== null)return;
     setState(() {
       _selectedImage = File(returnedImage!.path);
     });
   }
-  
+ 
 }

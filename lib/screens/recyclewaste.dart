@@ -1,11 +1,21 @@
+import 'dart:io';
+
+import 'package:dotted_border/dotted_border.dart';
 import 'package:econaija/constanst.dart';
 import 'package:econaija/screens/remitwaste.dart';
 import 'package:econaija/widgets/econaijatextformfield.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
   final _formKey= GlobalKey<FormState>();
-class recycleWaste extends StatelessWidget {
+class recycleWaste extends StatefulWidget {
   const recycleWaste({super.key});
 
+  @override
+  State<recycleWaste> createState() => _recycleWasteState();
+}
+
+class _recycleWasteState extends State<recycleWaste> {
+  File? _selectedImage;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,6 +51,35 @@ class recycleWaste extends StatelessWidget {
                 SizedBox(height: 10.0,),
                Eco9jaTextFormField(labelText: 'How Long Overdue?', hintText: '3 weeks')
               ],)),
+              SizedBox(height: 10,),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: DottedBorder(
+                  strokeWidth: 2,
+                  color: Colors.green,
+                  borderType: BorderType.RRect,
+                  radius: Radius.circular(12),
+                  padding: EdgeInsets.all(6),
+                  
+                  child: ClipRRect(
+                     borderRadius: BorderRadius.all(Radius.circular(12)),
+                    child: Container(
+                      
+                      height: 150.0,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextButton(child:Text('Upload an Image'), onPressed: () =>    _pickImageFromGallery(),),
+                          IconButton(onPressed: (){
+                            _pickImageFromGallery();
+                          }, icon: Icon(Icons.add_to_photos)),
+                            _selectedImage !=null ? Image.file(_selectedImage!): Text(''),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
               SizedBox(height: 100.0,),
              ElevatedButton(style:  ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
@@ -59,5 +98,12 @@ class recycleWaste extends StatelessWidget {
           ],
         )),
     );
+  }
+  Future _pickImageFromGallery()async{
+    final returnedImage= await ImagePicker().pickImage(source: ImageSource.gallery);
+    if(returnedImage== null)return;
+    setState(() {
+      _selectedImage = File(returnedImage!.path);
+    });
   }
 }

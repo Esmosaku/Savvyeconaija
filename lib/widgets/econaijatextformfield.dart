@@ -19,7 +19,7 @@ class Eco9jaTextFormField extends StatelessWidget {
           labelText: labelText,
           hintText: hintText,
           enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.greenAccent),
+            borderSide: const BorderSide(color: Colors.green),
             borderRadius: BorderRadius.circular(12),
           ),
           focusedBorder: OutlineInputBorder(
