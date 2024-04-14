@@ -65,18 +65,20 @@ class _RenderWasteState extends State<RenderWaste> {
                   child: ClipRRect(
                      borderRadius: BorderRadius.all(Radius.circular(12)),
                     child: Container(
-                      
+                      width: 220.0,
                       height: 150.0,
-                      child: Row(
+                      child: _selectedImage !=null ? FittedBox(child: Image.file(_selectedImage!), fit: BoxFit.fill,) : Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           TextButton(child:Text('Upload an Image'), onPressed: () =>    _pickImageFromGallery(),),
                           IconButton(onPressed: (){
                             _pickImageFromGallery();
                           }, icon: Icon(Icons.add_to_photos)),
-                            _selectedImage !=null ? Image.file(_selectedImage!): Text(''),
+                           
                         ],
                       ),
+                      
+                      
                     ),
                   ),
                 ),
