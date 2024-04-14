@@ -25,11 +25,17 @@ class _RemitwasteState extends State<Remitwaste> {
                       MaterialPageRoute(builder: (_) => const Remitwaste()),
                     ),),
           actions: [
-            CircleAvatar(
-              radius: 55,
-              foregroundColor: Colors.greenAccent,
-              backgroundImage: AssetImage('assets/images/usericon.png'),
-            )
+            ClipOval(
+  child:  Image.asset (
+    'assets/images/usericon.png',
+    fit: BoxFit.cover,
+  ),
+), SizedBox(width: 5,),
+            // CircleAvatar(
+            //   radius: 55,
+            //   foregroundColor: Colors.greenAccent,
+            //   backgroundImage: AssetImage('assets/images/usericon.png'),
+            // )
           ],
         ),
         body: SingleChildScrollView(

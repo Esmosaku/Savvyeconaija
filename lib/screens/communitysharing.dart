@@ -27,11 +27,12 @@ class _communitysharingState extends State<communitysharing> {
                       MaterialPageRoute(builder: (_) => const communitysharing()),
                     ),),
           actions: [
-            CircleAvatar(
-              radius: 55,
-              foregroundColor: Colors.greenAccent,
-              backgroundImage: AssetImage('assets/images/usericon.png'),
-            )
+             ClipOval(
+  child:  Image.asset (
+    'assets/images/usericon.png',
+    fit: BoxFit.cover,
+  ),
+), SizedBox(width: 5,),
           ],
         ),
         body: SingleChildScrollView(
