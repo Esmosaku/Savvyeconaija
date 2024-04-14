@@ -1,6 +1,8 @@
 import 'package:econaija/firebase_options.dart';
 import 'package:econaija/screens/loginPage.dart';
+import 'package:econaija/screens/recyclewaste.dart';
 import 'package:econaija/screens/remitwaste.dart';
+import 'package:econaija/screens/renderwaste.dart';
 import 'package:econaija/screens/signupPage.dart';
 import 'package:econaija/splash.dart';
 import 'package:flutter/material.dart';
@@ -24,13 +26,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const Splash(),
+      home: const Remitwaste(),
       debugShowCheckedModeBanner: false,
       routes: {
         'signupPage': (context) => const SignupPage(),
         'loginPage': (context) => const LoginPage(),
         'dashboard': (context) => const Dashboard(),
         'remitwaste': (context) => const Remitwaste(),
+        'renderwaste':(context) => const RenderWaste(),
+        'recyclewaste':(context) => const recycleWaste(),
                 }
     ); // define it once at root level.
   }
