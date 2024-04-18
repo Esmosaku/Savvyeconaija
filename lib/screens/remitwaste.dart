@@ -1,6 +1,7 @@
 import 'package:econaija/constanst.dart';
 import 'package:econaija/screens/recyclewaste.dart';
 import 'package:econaija/screens/renderwaste.dart';
+import 'package:econaija/widgets/econaijacustombutton.dart';
 import 'package:flutter/material.dart';
 
 class Remitwaste extends StatefulWidget {
@@ -62,17 +63,8 @@ class _RemitwasteState extends State<Remitwaste> {
                 });
               },activeColor: Colors.green,title: Text('Recycle Waste',style: kHeader2Designs,),subtitle: Text('Transform non-biodegradable waste into renewable resources again', style: TextStyle(color: Color(0xff303030)),),),
              SizedBox(height: 120,),
-              ElevatedButton(
-                
-                style:  ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  
-                  
-                  backgroundColor: Colors.green,
-                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50)
-                ),
-                 onPressed: () { 
-                  if (_value==2) {
+             Eco9jaCustomButton(ButtonText: 'Continue', onPressed: (){
+               if (_value==2) {
                      Navigator.push(
                       context,
                       MaterialPageRoute(builder: (_) => const recycleWaste()),
@@ -81,9 +73,8 @@ class _RemitwasteState extends State<Remitwaste> {
                       context,
                       MaterialPageRoute(builder: (_) => const RenderWaste()),
                     );}
+             }),
                  
-                  },
-              child: Text('Continue'),)
             ],
           ),
         ),
