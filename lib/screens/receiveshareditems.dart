@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:econaija/constanst.dart';
 import 'package:econaija/screens/recyclewaste.dart';
 import 'package:econaija/screens/remitwaste.dart';
+import 'package:econaija/widgets/econaijacustombutton.dart';
 import 'package:econaija/widgets/econaijatextformfield.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -59,19 +60,14 @@ class _receiveshareditemsState extends State<receiveshareditems> {
               }, icon: Icon(Icons.add_to_photos)),
             _selectedImage !=null ? Image.file(_selectedImage!): Text('Please select an image'),
             SizedBox(height: 100,),
-            ElevatedButton(style:  ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  
-                  
-                  backgroundColor: Colors.green,
-                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50)
-                ),onPressed: () => {
+            Eco9jaCustomButton(ButtonText: 'Request', onPressed:() => {
               if(_formKey.currentState!.validate()){
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Great'))
                 ),
               }
-            }, child: Text('Request'))
+            } ),
+         
           ],
          )),
     );

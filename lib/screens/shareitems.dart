@@ -5,6 +5,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:econaija/constanst.dart';
 import 'package:econaija/screens/recyclewaste.dart';
 import 'package:econaija/screens/remitwaste.dart';
+import 'package:econaija/widgets/econaijacustombutton.dart';
 import 'package:econaija/widgets/econaijatextformfield.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -90,19 +91,14 @@ class _shareitemsState extends State<shareitems> {
               ],)),
               
             SizedBox(height: 100,),
-            ElevatedButton(style:  ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  
-                  
-                  backgroundColor: Colors.green,
-                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50)
-                ),onPressed: () => {
+            Eco9jaCustomButton(ButtonText: 'Share', onPressed: () => {
               if(_formKey.currentState!.validate()){
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Great'))
                 ),
               }
-            }, child: Text('Share'))
+            }),
+             
           ],
          )),
     );
