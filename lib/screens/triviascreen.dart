@@ -1,15 +1,43 @@
 import 'package:econaija/constanst.dart';
+import 'package:econaija/model/question.dart';
 import 'package:econaija/screens/remitwaste.dart';
 import 'package:econaija/widgets/econaijacustomButton.dart';
 import 'package:econaija/widgets/optioncard.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-class Trivia extends StatelessWidget {
+class Trivia extends StatefulWidget {
   const Trivia({super.key});
 
   @override
+  State<Trivia> createState() => _TriviaState();
+}
+
+class _TriviaState extends State<Trivia> {
+  int? selectedAnswerIndex;
+  int questionIndex = 0;
+  int score = 0;
+  void pickAnswer(int value) {
+    selectedAnswerIndex = value;
+    final question = questions[questionIndex];
+    if (selectedAnswerIndex == question.correctAnswerIndex) {
+      score++;
+    }
+    setState(() {});
+  }
+
+  void goToNextQuestion() {
+    if (questionIndex < questions.length - 1) {
+      questionIndex++;
+      selectedAnswerIndex = null;
+    }
+    setState(() {});
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final question = questions[questionIndex];
+    bool isLastQuestion = questionIndex == questions.length - 1;
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
@@ -52,69 +80,100 @@ class Trivia extends StatelessWidget {
                 height: 5,
               ),
               Text(
-                'What do you do with empty plastics at home?',
+                question.question,
                 textAlign: TextAlign.center,
                 style: kHeader2Designs,
               ),
               SizedBox(
                 height: 40,
               ),
-              optionCard(
-                option: 'A.',
-                optionquestion: 'Throw it in the dustbin',
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: question.options.length,
+                itemBuilder: (context, index) {
+                  return optionCard(
+                      onPressed: (){
+                        if( selectedAnswerIndex==null){}
+                        pickAnswer(index);
+                       
+                      }
+                      ,
+                    option: question.options[index],
+                    currentIndex: index,
+                    selectedAnswerIndex: selectedAnswerIndex,
+                    correctAnswerIndex: question.correctAnswerIndex,
+                    optionquestion: question.optionvalues[index],
+                    isSelected: selectedAnswerIndex == index,
+                  
+                  );
+                },
               ),
-              SizedBox(
-                height: 10,
-              ),
-              optionCard(
-                option: 'B.',
-                optionquestion:
-                    'Keep separate and give to the\n waste management to recycle',
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              optionCard(
-                option: 'C.',
-                optionquestion: 'Throw it in the bush',
-              ),
+            
               SizedBox(
                 height: 50,
               ),
               Eco9jaCustomButton(
                 ButtonText: 'Check Answer',
                 onPressed: () {
-                  Alert(
-                    context: context,
-                    content: Column(children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text('Wrong Answer', style: TextStyle(color: Colors.red, fontWeight: FontWeight.w700),),
-                          Icon(Icons.close,color: Colors.red, size: 30,),
-                        ],
+                  print(selectedAnswerIndex);
+                  print(question.correctAnswerIndex);
+                  if (selectedAnswerIndex == question.correctAnswerIndex ) {
+                    Alert(
+                      context: context,
+                      content: Row(
+                        children: <Widget>[],
                       ),
-                      Text('Oops! That\'s incorrect', style: TextStyle(fontSize: 20.0),)
-                    ],),
-                    buttons: [
-                      DialogButton(
-                        color: Colors.red,
-                        child: Text(
-                          "Try Again",
-                          style: TextStyle(color: Colors.white, fontSize: 20),
-                        ),
-                        onPressed: () => Navigator.pop(context),
-                        width: 120,
-                      )
-                    ],
-                  ).show();
-                 Alert(
+                      title: "Correct Answer",
+                      style:
+                          AlertStyle(titleStyle: TextStyle(color: Colors.green)),
+                     
+                      buttons: [
+                        DialogButton(
+                          color: Colors.green,
+                          child: Text(
+                            "Restart",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                          onPressed: () {
+                            if(questionIndex == questions.length-1){
+                             
+                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=> Remitwaste()));
+                            }else{
+                              goToNextQuestion();
+                              Alert(context: context).dismiss();
+                            }
+                          },
+                          width: 120,
+                        )
+                      ],
+                    ).show();
+                  }else if(selectedAnswerIndex != question.correctAnswerIndex){
+                     Alert(
                     context: context,
-                       content: Row(children: <Widget>[],),
-                    title: "Correct Answer",
-                    style: AlertStyle(titleStyle: TextStyle(color: Colors.red)),
-                    desc: "When done with drinking or using plastic, glass or any container, please keep them in a separate bag for the waste management to pick up and recycle.",
-                 
+                    content: Column(
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              'Wrong Answer',
+                              style: TextStyle(
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                            Icon(
+                              Icons.close,
+                              color: Colors.red,
+                              size: 30,
+                            ),
+                          ],
+                        ),
+                        Text(
+                          'Oops! That\'s incorrect',
+                          style: TextStyle(fontSize: 20.0),
+                        )
+                      ],
+                    ),
                     buttons: [
                       DialogButton(
                         color: Colors.red,
@@ -127,7 +186,8 @@ class Trivia extends StatelessWidget {
                       )
                     ],
                   ).show();
-                
+                  }
+                  
                 },
               )
             ],
