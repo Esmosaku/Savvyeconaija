@@ -1,5 +1,7 @@
 //import 'package:econaija/screens/loginPage.dart';
 import 'dart:async';
+import 'package:econaija/screens/dashboard.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Splash extends StatefulWidget {
@@ -56,49 +58,64 @@ class Onboarding1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset('assets/images/Onboarding1pic.jpg'),
-              const SizedBox(height: 80),
-              const Text(
-                'Reduce',
-                style: TextStyle(
-                  color: Color.fromARGB(202, 26, 236, 100),
-                  fontSize: 30,
-                ),
+        body: StreamBuilder<User?>(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+                if(snapshot.connectionState== ConnectionState.waiting){
+                  return Center(child: CircularProgressIndicator(),);
+                }else if(snapshot.hasError){
+                  return Center(child: Text('Something went wrong!'),);
+                }
+           else if(snapshot.hasData){
+                  return  Dashboard();
+            }else{
+                 return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset('assets/images/Onboarding1pic.jpg'),
+                  const SizedBox(height: 80),
+                  const Text(
+                    'Reduce',
+                    style: TextStyle(
+                      color: Color.fromARGB(202, 26, 236, 100),
+                      fontSize: 30,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    'Cut down on waste as possible, and dispose properly',
+                    style: TextStyle(
+                      color: Color.fromARGB(202, 26, 236, 100),
+                      fontSize: 15,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Image.asset('assets/images/On1scroll.jpg'),
+                  const SizedBox(height: 40),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: const StadiumBorder(),
+                      padding:
+                          const EdgeInsets.symmetric(vertical: 15, horizontal: 120),
+                      backgroundColor: Colors.green,
+                      elevation: 0,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (BuildContext context) => const onboarding2()));
+                    },
+                    child: const Text(
+                      'Next',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 10),
-              const Text(
-                'Cut down on waste as possible, and dispose properly',
-                style: TextStyle(
-                  color: Color.fromARGB(202, 26, 236, 100),
-                  fontSize: 15,
-                ),
-              ),
-              const SizedBox(height: 20),
-              Image.asset('assets/images/On1scroll.jpg'),
-              const SizedBox(height: 40),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  shape: const StadiumBorder(),
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 15, horizontal: 120),
-                  backgroundColor: Colors.green,
-                  elevation: 0,
-                ),
-                onPressed: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (BuildContext context) => const onboarding2()));
-                },
-                child: const Text(
-                  'Next',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            ],
-          ),
+            );
+            }
+           
+          }
         ),
       ),
     );

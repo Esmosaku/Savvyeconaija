@@ -1,13 +1,18 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 
-class SignupPage extends StatelessWidget {
+class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
 
+  @override
+  State<SignupPage> createState() => _SignupPageState();
+}
 
+class _SignupPageState extends State<SignupPage> {
+  final emailcontroller= TextEditingController();
+  final passwordController= TextEditingController();
   // Other properties...
-  
-
   @override
   Widget build(BuildContext context) {
     const textStyle = TextStyle(
@@ -42,6 +47,7 @@ class SignupPage extends StatelessWidget {
                 Column(
                   children: <Widget>[
                     TextField(
+                
                       decoration: InputDecoration(
                           hintText: "First Name",
                           border: OutlineInputBorder(
@@ -64,6 +70,7 @@ class SignupPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 20),
                     TextField(
+                      controller:emailcontroller ,
                       decoration: InputDecoration(
                           hintText: "Email",
                           border: OutlineInputBorder(
@@ -86,6 +93,7 @@ class SignupPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 20),
                     TextField(
+                      controller: passwordController,
                       decoration: InputDecoration(
                         hintText: "Password: minimum of 8 characters",
                         border: OutlineInputBorder(
@@ -102,9 +110,10 @@ class SignupPage extends StatelessWidget {
                 Container(
                     padding: const EdgeInsets.only(top: 3, left: 3),
                     child: ElevatedButton(
-                      onPressed: () {
-                          Navigator.pushNamed(context, 'loginPage');
-                      },
+                      onPressed: signUp,
+                      // () {
+                      //     Navigator.pushNamed(context, 'loginPage');
+                      // },
                       style: ElevatedButton.styleFrom(
                         shape: const StadiumBorder(),
                         padding: const EdgeInsets.symmetric(vertical: 16),
@@ -136,6 +145,17 @@ class SignupPage extends StatelessWidget {
       ),
     );
   }
+  Future signUp() async{
+showDialog(context: context,barrierDismissible: false, builder: (context) => Center(child: CircularProgressIndicator(),),);
+
+try{
+  await FirebaseAuth.instance.createUserWithEmailAndPassword(email: emailcontroller.text.trim(), password: passwordController.text.trim());
+       Navigator.pushNamed(context, 'loginPage');
+} on FirebaseAuthException catch(e){
+  print(e);
+}
+  }
+  
 }
 
 

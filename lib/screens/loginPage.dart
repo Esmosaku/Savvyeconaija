@@ -1,10 +1,25 @@
 
 import 'package:flutter/material.dart';
 import 'dashboard.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final emailcontroller= TextEditingController();
+  final passwordController= TextEditingController();
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    emailcontroller.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -30,6 +45,7 @@ class LoginPage extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15),
                 child: TextField(
+                  controller: passwordController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Minimum of 8 characters',
@@ -37,22 +53,34 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
                const SizedBox(height: 60),
+                Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                child: TextField(
+                  controller: emailcontroller,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'hello@joe.com',
+                  ),
+                ),
+              ),
               Container(
                 height: 50,
                 width: 250,
                 decoration: BoxDecoration(
                    borderRadius: BorderRadius.circular(20),
                 ),
-
+                
                 
                
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => const Dashboard()),
-                    );
-                  },
+                  onPressed: signIn,
+                  // () {
+                  //   Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(builder: (_) => 
+                  //     const Dashboard()),
+                  //   );
+                  // },
                   
                   style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green,
@@ -71,12 +99,24 @@ class LoginPage extends StatelessWidget {
               SizedBox(
                 height: 160,
               ),
-              Text('Do not have an account? Create One'),
+             Text('Do not have an account? Create One'),
             ],
           ),
         ),
       ),
     );
+  }
+
+  Future signIn() async{
+    showDialog(context: context, barrierDismissible: false, builder: (context) => Center(child: CircularProgressIndicator(),),);
+
+    try{
+          await FirebaseAuth.instance.signInWithEmailAndPassword(email: emailcontroller.text.trim(), password: passwordController.text.trim());
+               Navigator.pushNamed(context, 'dashboard');
+    }on FirebaseAuthException catch (e){
+      print(e);
+    }
+
   }
 }
 
