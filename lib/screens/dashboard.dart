@@ -1,5 +1,7 @@
+import 'package:econaija/screens/communitysharing.dart';
 import 'package:econaija/screens/remitwaste.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -12,6 +14,7 @@ class _DashboardState extends State<Dashboard> {
   @override
 
   Widget build(BuildContext context) {
+    final user= FirebaseAuth.instance.currentUser!;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -60,7 +63,7 @@ class _DashboardState extends State<Dashboard> {
             // Navigate to the other page
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Remitwaste()),
+              MaterialPageRoute(builder: (context) => communitysharing()),
             );
           },
 
