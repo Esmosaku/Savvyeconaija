@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'dashboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,8 +10,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final emailcontroller= TextEditingController();
-  final passwordController= TextEditingController();
+  final emailcontroller = TextEditingController();
+  final passwordController = TextEditingController();
   @override
   void dispose() {
     // TODO: implement dispose
@@ -20,6 +19,7 @@ class _LoginPageState extends State<LoginPage> {
     passwordController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -39,7 +39,8 @@ class _LoginPageState extends State<LoginPage> {
               Container(
                 child: const Text(
                   'Password',
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, height: 4),
+                  style: TextStyle(
+                      fontSize: 15, fontWeight: FontWeight.bold, height: 4),
                 ),
               ),
               Padding(
@@ -52,8 +53,8 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-               const SizedBox(height: 60),
-                Padding(
+              const SizedBox(height: 60),
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15),
                 child: TextField(
                   controller: emailcontroller,
@@ -67,39 +68,32 @@ class _LoginPageState extends State<LoginPage> {
                 height: 50,
                 width: 250,
                 decoration: BoxDecoration(
-                   borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(20),
                 ),
-                
-                
-               
                 child: ElevatedButton(
                   onPressed: signIn,
                   // () {
                   //   Navigator.push(
                   //     context,
-                  //     MaterialPageRoute(builder: (_) => 
+                  //     MaterialPageRoute(builder: (_) =>
                   //     const Dashboard()),
                   //   );
                   // },
-                  
+
                   style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
-                      ),
-                  
+                    backgroundColor: Colors.green,
+                  ),
+
                   child: const Text(
                     'Login',
                     style: TextStyle(color: Colors.white, fontSize: 25),
                   ),
                 ),
-             
               ),
-
-              
-
               SizedBox(
                 height: 160,
               ),
-             Text('Do not have an account? Create One'),
+              Text('Do not have an account? Create One'),
             ],
           ),
         ),
@@ -107,21 +101,28 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Future signIn() async{
-    showDialog(context: context, barrierDismissible: false, builder: (context) => Center(child: CircularProgressIndicator(),),);
+  Future signIn() async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
 
-    try{
-          await FirebaseAuth.instance.signInWithEmailAndPassword(email: emailcontroller.text.trim(), password: passwordController.text.trim());
-               Navigator.pushNamed(context, 'dashboard');
-    }on FirebaseAuthException catch (e){
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailcontroller.text.trim(),
+          password: passwordController.text.trim());
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const Dashboard()),
+      );
+    } on FirebaseAuthException catch (e) {
       print(e);
-    }
 
+ 
+       
+    }
   }
 }
-
-
-
-
-
-  

@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const Splash(),
+      home: const RenderWaste(),
       debugShowCheckedModeBanner: false,
       routes: {
         'signupPage': (context) => const SignupPage(),

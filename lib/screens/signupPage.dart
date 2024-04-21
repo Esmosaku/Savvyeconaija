@@ -1,3 +1,4 @@
+import 'package:econaija/screens/loginPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -150,9 +151,13 @@ showDialog(context: context,barrierDismissible: false, builder: (context) => Cen
 
 try{
   await FirebaseAuth.instance.createUserWithEmailAndPassword(email: emailcontroller.text.trim(), password: passwordController.text.trim());
-       Navigator.pushNamed(context, 'loginPage');
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const LoginPage()),
+      );
 } on FirebaseAuthException catch(e){
   print(e);
+   
 }
   }
   
