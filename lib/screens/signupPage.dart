@@ -1,4 +1,5 @@
 import 'package:econaija/screens/loginPage.dart';
+import 'package:econaija/widgets/loading_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -147,14 +148,14 @@ class _SignupPageState extends State<SignupPage> {
     );
   }
   Future signUp() async{
-showDialog(context: context,barrierDismissible: false, builder: (context) => Center(child: CircularProgressIndicator(),),);
-
+showLoadingDialog(context); 
 try{
   await FirebaseAuth.instance.createUserWithEmailAndPassword(email: emailcontroller.text.trim(), password: passwordController.text.trim());
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const LoginPage()),
       );
+       hideLoadingDialog(context); 
 } on FirebaseAuthException catch(e){
   print(e);
    

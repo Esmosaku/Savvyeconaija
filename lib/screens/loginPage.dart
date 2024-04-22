@@ -1,4 +1,6 @@
+import 'package:econaija/widgets/loading_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:velocity_x/velocity_x.dart';
 import 'dashboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -8,7 +10,7 @@ class LoginPage extends StatefulWidget {
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
-
+final navigatorKey= GlobalKey<NavigatorState>();
 class _LoginPageState extends State<LoginPage> {
   final emailcontroller = TextEditingController();
   final passwordController = TextEditingController();
@@ -23,6 +25,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: SingleChildScrollView(
@@ -102,27 +105,23 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future signIn() async {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
-
+    showLoadingDialog(context); 
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailcontroller.text.trim(),
           password: passwordController.text.trim());
+          //
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const Dashboard()),
       );
+       hideLoadingDialog(context); 
     } on FirebaseAuthException catch (e) {
       print(e);
 
  
        
     }
+ 
   }
 }
