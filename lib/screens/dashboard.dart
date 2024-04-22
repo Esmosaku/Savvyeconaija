@@ -1,5 +1,7 @@
 import 'package:econaija/screens/communitysharing.dart';
+import 'package:econaija/screens/forum.dart';
 import 'package:econaija/screens/remitwaste.dart';
+import 'package:econaija/screens/triviamain.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -18,6 +20,17 @@ class _DashboardState extends State<Dashboard> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        appBar:  AppBar(
+          leading:IconButton(icon: Icon(Icons.logout_outlined) ,onPressed: () => FirebaseAuth.instance.signOut(),),
+          actions: [
+            ClipOval(
+  child:  Image.asset (
+    'assets/images/usericon.png',
+    fit: BoxFit.cover,
+  ),
+), SizedBox(width: 5,),
+          ],
+        ),
         body: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -78,12 +91,25 @@ class _DashboardState extends State<Dashboard> {
                 textAlign: TextAlign.right,
                 style: TextStyle(color: Colors.green,fontSize:20),
               ),
+              TextButton(onPressed: () {
+                 Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => TriviaMain()),
+            );
+              }, child: Text('Trivia')),
+              TextButton(onPressed: () {
+                 Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Forum()),
+            );
+              }, child: Text('Forum'))
             ],
           ),
         ),
       ),
     );
 }
+ 
 }
 
  

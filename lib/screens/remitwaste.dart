@@ -1,4 +1,5 @@
 import 'package:econaija/constanst.dart';
+import 'package:econaija/screens/dashboard.dart';
 import 'package:econaija/screens/recyclewaste.dart';
 import 'package:econaija/screens/renderwaste.dart';
 import 'package:econaija/widgets/econaijacustombutton.dart';
@@ -23,7 +24,7 @@ class _RemitwasteState extends State<Remitwaste> {
         appBar: AppBar(
           leading: BackButton(onPressed: () => Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => const Remitwaste()),
+                      MaterialPageRoute(builder: (_) => const Dashboard()),
                     ),),
           actions: [
             ClipOval(

@@ -2,11 +2,13 @@ import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:econaija/constanst.dart';
+import 'package:econaija/screens/dashboard.dart';
 import 'package:econaija/screens/remitwaste.dart';
 import 'package:econaija/widgets/econaijacustombutton.dart';
 import 'package:econaija/widgets/econaijatextformfield.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
   final _formKey= GlobalKey<FormState>();
 class recycleWaste extends StatefulWidget {
   const recycleWaste({super.key});
@@ -87,6 +89,35 @@ class _recycleWasteState extends State<recycleWaste> {
               SizedBox(height: 100.0,),
               Eco9jaCustomButton(ButtonText: 'Submit', onPressed:  () => {
               if(_formKey.currentState!.validate()){
+                Alert(
+                        context: context,
+                        content: Column(children: <Widget>[
+                          Image.asset('assets/images/Checkmark.png'),
+                          Text('Submitted Successfully',
+                              style: TextStyle(color: Colors.green)),
+                          Text(
+                            'We received your information. Expect to\nhear from us shortly',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 16.0),
+                          ),
+                        ]),
+                        buttons: [
+                          DialogButton(
+                            color: Colors.green,
+                            child: Text(
+                              "Close",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                      builder: (_) => Dashboard()));
+                              Navigator.pop(context);
+                            },
+                            width: 120,
+                          ),
+                        ]).show(),
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Great'))
                 ),

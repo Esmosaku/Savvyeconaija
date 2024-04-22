@@ -1,4 +1,5 @@
 import 'package:econaija/firebase_options.dart';
+import 'package:econaija/screens/chatscreen.dart';
 import 'package:econaija/screens/loginPage.dart';
 import 'package:econaija/screens/recyclewaste.dart';
 import 'package:econaija/screens/remitwaste.dart';
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const SignupPage(),
+      home: const Splash(),
       debugShowCheckedModeBanner: false,
       routes: {
         'signupPage': (context) => const SignupPage(),

@@ -1,6 +1,8 @@
 //import 'package:econaija/screens/loginPage.dart';
 import 'dart:async';
 import 'package:econaija/screens/dashboard.dart';
+import 'package:econaija/screens/loginPage.dart';
+import 'package:econaija/screens/signupPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -218,7 +220,10 @@ class onboarding3 extends StatelessWidget {
                   elevation: 0,
                 ),
                 onPressed: () {
-                      Navigator.pushNamed(context, 'signupPage');  
+                      Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SignupPage()),
+            );
                 },
                 child: const Text(
                   'Get Started',
@@ -234,8 +239,10 @@ class onboarding3 extends StatelessWidget {
                   elevation: 0,
                 ),
                 onPressed: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (BuildContext context) => const onboarding3()));
+                   Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LoginPage()),
+            );
                 },
                 child: const Text(
                   'Log In',
