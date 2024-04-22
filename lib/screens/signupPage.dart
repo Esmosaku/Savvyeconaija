@@ -1,8 +1,6 @@
 import 'package:econaija/screens/loginPage.dart';
-import 'package:econaija/widgets/loading_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -12,8 +10,8 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
-  final emailcontroller= TextEditingController();
-  final passwordController= TextEditingController();
+  final emailcontroller = TextEditingController();
+  final passwordController = TextEditingController();
   // Other properties...
   @override
   Widget build(BuildContext context) {
@@ -49,7 +47,6 @@ class _SignupPageState extends State<SignupPage> {
                 Column(
                   children: <Widget>[
                     TextField(
-                
                       decoration: InputDecoration(
                           hintText: "First Name",
                           border: OutlineInputBorder(
@@ -72,7 +69,7 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                     const SizedBox(height: 20),
                     TextField(
-                      controller:emailcontroller ,
+                      controller: emailcontroller,
                       decoration: InputDecoration(
                           hintText: "Email",
                           border: OutlineInputBorder(
@@ -147,21 +144,27 @@ class _SignupPageState extends State<SignupPage> {
       ),
     );
   }
-  Future signUp() async{
-showLoadingDialog(context); 
-try{
-  await FirebaseAuth.instance.createUserWithEmailAndPassword(email: emailcontroller.text.trim(), password: passwordController.text.trim());
-    Navigator.pushReplacement(
+
+  Future signUp() async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailcontroller.text.trim(),
+          password: passwordController.text.trim());
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const LoginPage()),
       );
-       hideLoadingDialog(context); 
-} on FirebaseAuthException catch(e){
-  print(e);
-   
-}
+    } on FirebaseAuthException catch (e) {
+      print(e);
+    }
+    Navigator.of(context, rootNavigator: true).pop();
   }
-  
 }
-
-

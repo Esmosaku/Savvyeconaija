@@ -1,4 +1,3 @@
-import 'package:econaija/widgets/loading_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'dashboard.dart';
@@ -105,23 +104,31 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future signIn() async {
-    showLoadingDialog(context); 
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailcontroller.text.trim(),
           password: passwordController.text.trim());
-          //
+              
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const Dashboard()),
       );
-       hideLoadingDialog(context); 
+       
     } on FirebaseAuthException catch (e) {
       print(e);
 
  
        
     }
- 
+    Navigator.of(context, rootNavigator: true).pop();
+  
   }
 }
