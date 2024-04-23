@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "econaija-d1fb5"
-  }
+    "default": "econaija-d1fb5",
+    "econaija-30e99": "econaija-30e99"
+  },
+  "targets": {},
+  "etags": {}
 }

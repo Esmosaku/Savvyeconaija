@@ -1,9 +1,25 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dashboard.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
+
+  Future<void> logIn(String email, String password) async {
+  try {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    // User logged in successfully
+  } catch (e) {
+    // Handle error
+  }
+}
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +29,7 @@ class LoginPage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(top: 60.0),
                 child: Text(
                   'Welcome Back',
@@ -27,7 +43,7 @@ class LoginPage extends StatelessWidget {
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, height: 4),
                 ),
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15),
                 child: TextField(
                   decoration: InputDecoration(
@@ -68,10 +84,10 @@ class LoginPage extends StatelessWidget {
 
               
 
-              SizedBox(
+              const SizedBox(
                 height: 160,
               ),
-              Text('Do not have an account? Create One'),
+              const Text('Do not have an account? Create One'),
             ],
           ),
         ),

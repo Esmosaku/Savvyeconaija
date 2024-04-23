@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 class SignupPage extends StatelessWidget {
   const SignupPage({super.key});
 
-
-  // Other properties...
+Future<void> signUp(String email, String password) async {
+  try {
+    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    // User created successfully
+  } catch (e) {
+    // Handle error
+  }
+}
   
-
   @override
   Widget build(BuildContext context) {
     const textStyle = TextStyle(

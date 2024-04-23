@@ -1,8 +1,9 @@
+import 'package:econaija/screens/profile.dart';
 import 'package:econaija/screens/remitwaste.dart';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatefulWidget {
-  const Dashboard({Key? key}) : super(key: key);
+  const Dashboard({super.key});
 
   @override
   _DashboardState createState() => _DashboardState();
@@ -10,77 +11,141 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   @override
-
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        appBar: AppBar(
+          
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Profile()),
+                      );
+              },
+              icon: const Icon(Icons.account_circle),
+            ),
+          ],
+        ),  
+
+
         body: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(left: 130),
                 child: Text(
                   'Dashboard',
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, height: 6, color: Colors.green),
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, height: 3, color: Colors.green),
                 ),
               ),
 
+              const SizedBox(height: 8), 
 
-              const SizedBox(height: 1),
-               Align(
-  alignment: Alignment.centerLeft,
-  child: GestureDetector(
-          onTap: () {
-            // Navigate to the other page
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Remitwaste()),
-            );
-          },
-
-  child: Image.asset('assets/images/Ellipseremitwaste.jpg'),
-),
-               ),
-              
-              const SizedBox(height: 5),
-              const Text(
-                'Remit Waste',
-                textAlign: TextAlign.left,
-                style: TextStyle(color: Colors.green,fontSize:20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly, 
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      // Navigate to the Remitwaste screen
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Remitwaste()),
+                      );
+                    },
+                    child: Column(
+                      children: [
+                        Image.asset('assets/images/Ellipseremitwaste.jpg'),
+                        const SizedBox(height: 5),
+                        const Text(
+                          'Remit Waste',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.green, fontSize: 20),
+                        ),
+                      ],
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      // Navigate to the Remitwaste screen
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Remitwaste()),
+                      );
+                    },
+                    child: Column(
+                      children: [
+                        Image.asset('assets/images/EllipseCommunity.jpg'),
+                        const SizedBox(height: 5),
+                        const Text(
+                          'Community',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.green, fontSize: 20),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
 
-              const SizedBox(height: 0),
-               Align(
-  alignment: Alignment.topRight,
-  child: GestureDetector(
-          onTap: () {
-            // Navigate to the other page
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Remitwaste()),
-            );
-          },
 
-  child: Image.asset('assets/images/EllipseCommunity.jpg',
-  ),
-),
-               ),
-              
-              const SizedBox(height: 5),
-              const Text(
-                'Community',
-                textAlign: TextAlign.right,
-                style: TextStyle(color: Colors.green,fontSize:20),
+              const SizedBox(height: 40), 
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly, 
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      // Navigate to the Remitwaste screen
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Remitwaste()),
+                      );
+                    },
+                    child: Column(
+                      children: [
+                        Image.asset('assets/images/Ellipsewaste trivia.jpg'),
+                        const SizedBox(height: 5),
+                        const Text(
+                          'Waste Trivia',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.green, fontSize: 20),
+                        ),
+                      ],
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      // Navigate to the Remitwaste screen
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Remitwaste()),
+                      );
+                    },
+                    child: Column(
+                      children: [
+                        Image.asset('assets/images/Ellipsenews.jpg'),
+                        const SizedBox(height: 5),
+                        const Text(
+                          'News/Events',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.green, fontSize: 20),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
         ),
       ),
     );
-}
+  }
 }
 
  

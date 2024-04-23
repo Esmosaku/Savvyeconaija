@@ -44,38 +44,42 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBNle9rb1lWGCUEEnjQmwQL21gwVL6bFw0',
-    appId: '1:319742121014:web:f53048579fc3386ad93497',
-    messagingSenderId: '319742121014',
-    projectId: 'econaija-d1fb5',
-    authDomain: 'econaija-d1fb5.firebaseapp.com',
-    storageBucket: 'econaija-d1fb5.appspot.com',
-    measurementId: 'G-K8EMZSGKVW',
+    apiKey: "AIzaSyCHtUoUhYLA2K0sqVw0Dxj6HYTGsKu5u6w",
+    authDomain: "econaija-30e99.firebaseapp.com",
+    projectId: "econaija-30e99",
+    storageBucket: "econaija-30e99.appspot.com",
+    messagingSenderId: "96705107543",
+    appId: "1:96705107543:web:e787247bfc0174e8b6b512",
+    measurementId: "G-FHN7WZN6VQ",
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBD3ObOwTKy9FVft7Q888GnOtoaY0jyZ-o',
-    appId: '1:319742121014:android:1954ece8fe05a5dad93497',
-    messagingSenderId: '319742121014',
-    projectId: 'econaija-d1fb5',
-    storageBucket: 'econaija-d1fb5.appspot.com',
+   apiKey: "AIzaSyCHtUoUhYLA2K0sqVw0Dxj6HYTGsKu5u6w",
+    authDomain: "econaija-30e99.firebaseapp.com",
+    projectId: "econaija-30e99",
+    storageBucket: "econaija-30e99.appspot.com",
+    messagingSenderId: "96705107543",
+    appId: "1:96705107543:web:e787247bfc0174e8b6b512",
+    measurementId: "G-FHN7WZN6VQ",
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCGOaidv1Fm8s_dzlY0uRkVncZqcwTpBAU',
-    appId: '1:319742121014:ios:a4133744790bf1e5d93497',
-    messagingSenderId: '319742121014',
-    projectId: 'econaija-d1fb5',
-    storageBucket: 'econaija-d1fb5.appspot.com',
-    iosBundleId: 'com.example.econaija',
+    apiKey: "AIzaSyCHtUoUhYLA2K0sqVw0Dxj6HYTGsKu5u6w",
+    authDomain: "econaija-30e99.firebaseapp.com",
+    projectId: "econaija-30e99",
+    storageBucket: "econaija-30e99.appspot.com",
+    messagingSenderId: "96705107543",
+    appId: "1:96705107543:web:e787247bfc0174e8b6b512",
+    measurementId: "G-FHN7WZN6VQ",
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCGOaidv1Fm8s_dzlY0uRkVncZqcwTpBAU',
-    appId: '1:319742121014:ios:ed1b1038c12a1d1dd93497',
-    messagingSenderId: '319742121014',
-    projectId: 'econaija-d1fb5',
-    storageBucket: 'econaija-d1fb5.appspot.com',
-    iosBundleId: 'com.example.econaija.RunnerTests',
+   apiKey: "AIzaSyCHtUoUhYLA2K0sqVw0Dxj6HYTGsKu5u6w",
+    authDomain: "econaija-30e99.firebaseapp.com",
+    projectId: "econaija-30e99",
+    storageBucket: "econaija-30e99.appspot.com",
+    messagingSenderId: "96705107543",
+    appId: "1:96705107543:web:e787247bfc0174e8b6b512",
+    measurementId: "G-FHN7WZN6VQ",
   );
 }

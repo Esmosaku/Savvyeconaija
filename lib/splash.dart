@@ -50,7 +50,7 @@ class _SplashState extends State<Splash> {
 
 
 class Onboarding1 extends StatelessWidget {
-  const Onboarding1({Key? key}) : super(key: key);
+  const Onboarding1({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +106,7 @@ class Onboarding1 extends StatelessWidget {
 }
 
 class onboarding2 extends StatelessWidget {
-  const onboarding2({Key? key}) : super(key: key);
+  const onboarding2({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -162,7 +162,7 @@ class onboarding2 extends StatelessWidget {
 }
 
 class onboarding3 extends StatelessWidget {
-  const onboarding3({Key? key}) : super(key: key);
+  const onboarding3({super.key});
 
   @override
   Widget build(BuildContext context) {
